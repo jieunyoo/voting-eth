@@ -9,7 +9,7 @@ contract Election {
 		uint voteCount;
 	}
 
-	//stores key-valule pairs
+	//stores key-value pairs
 	mapping(uint => Candidate) public candidates;
 	mapping(address => bool) public voters;
 
@@ -24,6 +24,9 @@ contract Election {
 
     }
 
+	event votedEvent (uint index_candidateId);
+
+
 	function addCandidate(string memory _name, string memory _party) private {
 		candidatesCount++;
 		candidates[candidatesCount] = Candidate(candidatesCount, _name, _party, 0);
@@ -35,6 +38,9 @@ contract Election {
 		require(_candidateId > 0 && _candidateId <= candidatesCount);
 		voters[msg.sender] = true;
 		candidates[_candidateId].voteCount++;
+		
+		//trigger voted event
+		emit votedEvent(_candidateId);
 	}
 
 }
