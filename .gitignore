@@ -1,0 +1,26 @@
+*.swp
+*.swo
+
+# Logs
+logs
+*.log
+
+.env
+
+coverage
+coverage.json
+
+# Dependency directory
+node_modules
+
+# Debug log from npm
+npm-debug.log
+
+# truffle build directory
+build/
+
+# macOS
+.DS_Store
+
+# truffle
+.node-xmlhttprequest-*
