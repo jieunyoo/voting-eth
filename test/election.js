@@ -30,6 +30,7 @@ contract("Election", accounts => {
 	});
 
 
+	//note: voters is a boolean (0 is false)
 	//this tests that a voter from account[0] votes for candidate 2, and that now voter 1 has voted once
 	it("checks that a voter can vote", async () => {
 		const instance = await Election.deployed();
@@ -38,6 +39,8 @@ contract("Election", accounts => {
 		assert.equal(voterresult, 1, "voter 1 voted");
 
 	});
+
+
 
 	//this test that voter from account[1] voted for candidate 1, and candidate 1 now has just 1 vote
 	it("checks that a candidate got a vote from a voter", async () => {
@@ -58,7 +61,6 @@ contract("Election", accounts => {
 			const tryVotingAgain = await instance.vote(1, {from:accounts[3]});
 		} catch (error) {
 			assert(error.message, "error message must contain revert");
-			return
 		}
 	});
 
