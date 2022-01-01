@@ -34,8 +34,8 @@ contract("Election", accounts => {
 	it("checks that a voter can vote", async () => {
 		const instance = await Election.deployed();
 		const voted = await instance.vote(2, {from:accounts[0]});
-		const voterResult = await instance.voters(accounts[0]);
-		assert.equal(voterResult, 1, "voter 1 voted");
+		const voterresult = await instance.voters(accounts[0]);
+		assert.equal(voterresult, 1, "voter 1 voted");
 
 	});
 
@@ -49,9 +49,18 @@ contract("Election", accounts => {
 	});
 
 
-
-
-
+	it("throws an exception if there's double voting", async() => {
+		const instance = await Election.deployed();
+		const voted = await instance.vote(1, {from:accounts[3]});
+		const voterResult = await instance.voters(accounts[3]);
+		assert.equal(voterResult, 1, "voter 3 voted");
+		try {
+			const tryVotingAgain = await instance.vote(1, {from:accounts[3]});
+		} catch (error) {
+			assert(error.message, "error message must contain revert");
+			return
+		}
+	});
 
 });
 
