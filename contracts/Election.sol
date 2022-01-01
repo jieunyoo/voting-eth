@@ -20,6 +20,8 @@ contract Election {
     constructor () public {
         addCandidate("Candidate 1", "Green");
         addCandidate("Candidate 2", "Blue");
+        addCandidate("Candidate 3", "Red");
+
     }
 
 	function addCandidate(string memory _name, string memory _party) private {
